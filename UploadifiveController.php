@@ -118,6 +118,7 @@ class UploadifiveController extends Controller
         $filenames = explode(",", $filenamesString);
         $filenames = array_filter($filenames); // remove empty
         $filenames = array_unique($filenames);
+        $filenames = array_map('trim', $filenames);
 
         $associativeFilenames = array();
         foreach ($filenames as $filename)
