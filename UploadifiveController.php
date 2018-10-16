@@ -111,4 +111,20 @@ class UploadifiveController extends Controller
             '..' . DIRECTORY_SEPARATOR .
             $this->uploadFolder . DIRECTORY_SEPARATOR;
     }
+    
+    // This can be used by other Controllers to process returned value of upload action
+    public static function splitFilenames($filenamesString)
+    {
+        $filenames = explode(",", $filenamesString);
+        $filenames = array_filter($filenames); // remove empty
+        $filenames = array_unique($filenames);
+
+        $associativeFilenames = array();
+        foreach ($filenames as $filename)
+        {
+            $associativeFilenames[substr($filename, 0, 13)] = substr($filename, 13);
+        }
+
+        return $associativeFilenames;
+    }
 }
